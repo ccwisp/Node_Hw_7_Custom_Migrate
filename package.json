@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "setup": "node setup-db.js"
+    "setup": "node src/setup-db.js"
   },
   "author": "David Vardanian",
   "license": "ISC",

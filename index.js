@@ -1,13 +1,13 @@
-const db = require('./config');
+const db = require('./src/config');
 const fs = require('fs-extra');
-const getFiles = require('./getMigrations');
+const getFiles = require('./src/getMigrations');
 
 db.promise()
   .query('SELECT version AS solution FROM db_version ')
   .then((results) => {
     console.log('Your DB version is: ', results[0][0].solution);
     const version = results[0][0].solution;
-    getFiles('./migrations').then((files) => {
+    getFiles('./src/migrations').then((files) => {
       const resFiles = files.slice(version);
       if (resFiles.length === 0) {
         console.log('You are on the latest db version');
@@ -17,7 +17,7 @@ db.promise()
       console.log(resFiles);
       console.log('Starting to execute migrations :');
       resFiles.forEach((file) => {
-        const sql = fs.readFileSync('./migrations/' + file).toString();
+        const sql = fs.readFileSync('src/migrations/' + file).toString();
         db.promise()
           .query(sql)
           .then(
