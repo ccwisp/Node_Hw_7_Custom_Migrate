@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-module.fileCount = 0;
 
 function readdir(path) {
   // Promise-based version of readdir.

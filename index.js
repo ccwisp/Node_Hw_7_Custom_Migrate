@@ -1,5 +1,6 @@
-const db = require('./src/config');
+const path = require('path');
 const fs = require('fs-extra');
+const db = require('./src/config');
 const getFiles = require('./src/getMigrations');
 
 db.promise()
@@ -17,7 +18,9 @@ db.promise()
       console.log(resFiles);
       console.log('Starting to execute migrations :');
       resFiles.forEach((file) => {
-        const sql = fs.readFileSync('src/migrations/' + file).toString();
+        const sql = fs
+          .readFileSync(path.join(__dirname, './src/migrations/' + file))
+          .toString();
         db.promise()
           .query(sql)
           .then(
